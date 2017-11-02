@@ -18,28 +18,26 @@ import java.util.List;
 import static PhoneBook.Login.ACTIVE_USER;
 
 public class DbHelper{
-    private static DbHelper ourInstance = new DbHelper();
+    private static DbHelper INSTANCE = new DbHelper();
     public final ContactsObservable contactsObservable;
     public final UsersObservable usersObservable;
 
     private SessionFactory sessionFactory;
 
     public static DbHelper getInstance() {
-        return ourInstance;
+        return INSTANCE;
     }
 
     private DbHelper() {
-        // A SessionFactory is set up once for an application!
         final StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
-                .configure() // configures settings from hibernate.cfg.xml
+                .configure()
                 .build();
         try {
             sessionFactory = new MetadataSources( registry ).buildMetadata().buildSessionFactory();
         }
         catch (Exception e) {
-            // The registry would be destroyed by the SessionFactory, but we had trouble building the SessionFactory
-            // so destroy it manually.
             StandardServiceRegistryBuilder.destroy( registry );
+            System.exit(-1);
         }
         this.contactsObservable = new ContactsObservable();
         this.usersObservable = new UsersObservable();
@@ -169,14 +167,7 @@ public class DbHelper{
         session.close();
         return users;
     }
-    void addContact(Contact contact){
-        Session session = sessionFactory.openSession();
-        session.beginTransaction();
-        session.save(contact);
-        session.getTransaction().commit();
-        session.close();
-    }
-    int deleteContact(Contact contact){
+    private int deleteContact(Contact contact){
         Session session = sessionFactory.openSession();
         session.beginTransaction();
         Query query = session.createQuery("delete Contact where id = :id");
@@ -201,14 +192,14 @@ public class DbHelper{
         return contacts;
     }
 
-    void updateUser(User user) {
+    private void updateUser(User user) {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
         session.saveOrUpdate(user);
         session.getTransaction().commit();
         session.close();
     }
-    void updateContact(Contact contact){
+    private void updateContact(Contact contact){
         Session session = sessionFactory.openSession();
         session.beginTransaction();
         session.saveOrUpdate(contact);

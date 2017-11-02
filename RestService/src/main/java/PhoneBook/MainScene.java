@@ -24,7 +24,7 @@ import java.util.List;
 
 import static PhoneBook.Login.ACTIVE_USER;
 
-public class MainScene {
+class MainScene {
 
     private Scene scene;
     private ObservableList<Contact> data;
@@ -33,7 +33,7 @@ public class MainScene {
     private TableView table;
     private Observable<UserAction> menuObservable;
 
-    public MainScene() {
+    MainScene() {
         table = new TableView();
         scene = new Scene(new Group());
 
@@ -142,18 +142,20 @@ public class MainScene {
         }
         return menuBar;
     }
-    public Scene getScene() {
+
+    Scene getScene() {
         return scene;
     }
 
-    public Observable<UserAction> getMenuObservable() {
+    Observable<UserAction> getMenuObservable() {
         return menuObservable;
     }
 
-    public void reset() {
+    void reset() {
         this.data.clear();
     }
-    public void setData(List<Contact> contacts){
+
+    void setData(List<Contact> contacts){
         if(contacts != null) {
             this.data = FXCollections.observableArrayList(contacts);
         } else {

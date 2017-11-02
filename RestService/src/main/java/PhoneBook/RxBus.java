@@ -7,18 +7,18 @@ import io.reactivex.Observable;
 public class RxBus {
     private static RxBus INSTANCE = new RxBus();
 
-    public static RxBus getInstance(){
+    static RxBus getInstance(){
         return INSTANCE;
     }
     private final Relay<Object> bus = PublishRelay.create().toSerialized();
 
     private RxBus(){}
 
-    public void accept(Object o){
+    void accept(Object o){
         bus.accept(o);
     }
 
-    public Observable<Object> get() {
+    Observable<Object> get() {
         return bus;
     }
 

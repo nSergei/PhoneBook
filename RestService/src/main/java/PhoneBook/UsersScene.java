@@ -1,7 +1,6 @@
 package PhoneBook;
 
 import PhoneBook.Persistence.DbHelper;
-import PhoneBook.Persistence.Entities.Contact;
 import PhoneBook.Persistence.Entities.User;
 import io.reactivex.Observable;
 import io.reactivex.rxjavafx.observables.JavaFxObservable;
@@ -16,7 +15,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 
@@ -32,7 +30,7 @@ public class UsersScene {
     private TableView table;
     private Observable<UserAction> menuObservable;
 
-    public UsersScene() {
+    UsersScene() {
         table = new TableView();
         scene = new Scene(new Group());
 
@@ -104,18 +102,18 @@ public class UsersScene {
         }
         return menuBar;
     }
-    public Scene getScene() {
+    Scene getScene() {
         return scene;
     }
 
-    public Observable<UserAction> getMenuObservable() {
+    Observable<UserAction> getMenuObservable() {
         return menuObservable;
     }
 
-    public void reset() {
+    void reset() {
         this.data.clear();
     }
-    public void setData(List<User> users){
+    void setData(List<User> users){
         if(users != null) {
             this.data = FXCollections.observableArrayList(users);
         } else {

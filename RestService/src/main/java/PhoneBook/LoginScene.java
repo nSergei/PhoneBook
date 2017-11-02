@@ -15,7 +15,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 import javafx.util.Pair;
 
-public class LoginScene {
+class LoginScene {
 
     private Scene scene;
     private Button signInButton;
@@ -24,7 +24,7 @@ public class LoginScene {
     private PasswordField passwordField;
     private Text errorText;
 
-    public LoginScene() {
+    LoginScene() {
         GridPane grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
         grid.setHgap(10);
@@ -61,7 +61,7 @@ public class LoginScene {
         scene = new Scene(grid, 300, 275);
     }
 
-    public Scene getScene() {
+    Scene getScene() {
         return scene;
     }
     Observable<Pair<UserAction, User>> getSigninAttempedObservable(){
@@ -85,13 +85,13 @@ public class LoginScene {
                         new User(loginField.getText(), passwordField.getText(), "", -1)));
     }
 
-    public void showLoginFailedMessage(String message) {
+    void showLoginFailedMessage(String message) {
         errorText.setText(message);
         signInButton.setDisable(false);
         signUpButton.setDisable(false);
     }
 
-    public void reset() {
+    void reset() {
         passwordField.setText("");
         signInButton.setDisable(false);
         signUpButton.setDisable(false);
