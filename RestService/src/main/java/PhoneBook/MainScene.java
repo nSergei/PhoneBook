@@ -66,6 +66,7 @@ class MainScene {
         phoneNumberCol.setMinWidth(140);
         phoneNumberCol.setCellValueFactory(
                 new PropertyValueFactory<Contact, String>("phoneNumber"));
+        phoneNumberCol.setCellFactory(TextFieldTableCell.forTableColumn());
         phoneNumberCol.setOnEditCommit(
                 new EventHandler<TableColumn.CellEditEvent<Contact, String>>() {
                     @Override
